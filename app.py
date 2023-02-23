@@ -18,11 +18,11 @@ fig = px.line(
     color_discrete_map={"Gold": "gold"}
 )
 
-app = dash.Dash(__name__)
-app.title = "Precious Metal Prices 2018-2021"
-server = app.server
+dash_app = dash.Dash(__name__)
+dash_app.title = "Precious Metal Prices 2018-2021"
+app = dash_app.server
 
-app.layout = html.Div(
+dash_app.layout = html.Div(
     id="app-container",
     children=[
         html.Div(
@@ -86,7 +86,7 @@ app.layout = html.Div(
 )
 
 
-@app.callback(
+@dash_app.callback(
     Output("price-chart", "figure"),
     Input("metal-filter", "value"),
     Input("date-range", "start_date"),
@@ -126,4 +126,4 @@ def update_chart(metal, start_date, end_date):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    dash_app.run_server(debug=True)
